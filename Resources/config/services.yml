@@ -1,0 +1,6 @@
+services:
+   seed.loader:
+       class: Soyuka\SeedBundle\SeedLoader
+       arguments: [%seed.prefix%]
+       calls:
+           - [ setContainer, [ @service_container ] ]

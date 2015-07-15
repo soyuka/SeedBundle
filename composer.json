@@ -1,0 +1,21 @@
+{
+    "name": "soyuka/seed-bundle",
+    "description": "Seed helper through symfony commands",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Soyuka",
+            "email": "soyuka@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "^2.7",
+        "symfony/console": "^2.7",
+        "symfony/finder": "^2.7",
+        "doctrine/doctrine-bundle": "^1.5",
+        "doctrine/orm": "~2.3"
+    },
+    "autoload": {
+      "psr-4": { "Soyuka\\SeedBundle\\": "" } 
+    }
+}
