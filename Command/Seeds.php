@@ -35,6 +35,7 @@ class Seeds extends Command
             ->setDescription('Load requested seeds')
             ->addArgument('seeds', InputArgument::IS_ARRAY | InputArgument::OPTIONAL)
             ->addOption('break', '-b', InputOption::VALUE_NONE)
+            ->addOption('debug', '-d', InputOption::VALUE_NONE)
             ->addOption('skip', '', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY);
 
         $this->setHelp(<<<EOT
@@ -55,6 +56,10 @@ You can skip some seeds:
 
 If you want to break on a bad exit code use -b
 
+Want to debug seeds ordering? You can launch a simulation by using the -d option:
+
+  <info>php app/console seeds:load -d</info>
+
 EOT
             );
     }
@@ -72,6 +77,7 @@ EOT
         $seeds = $input->getArgument('seeds');
         $break = $input->getOption('break');
         $skip = $input->getOption('skip');
+        $debug = $input->getOption('debug');
 
         if($skip) {
             $skip = is_array($skip) ?: [$skip];
@@ -143,7 +149,11 @@ EOT
 
             $tstart = microtime(true);
             
-            $code = $commands[$i]->run($arguments, $output);
+            if($debug) {
+                $code = 0;
+            } else {
+                $code = $commands[$i]->run($arguments, $output);
+            }
 
             $time = microtime(true) - $tstart;
 

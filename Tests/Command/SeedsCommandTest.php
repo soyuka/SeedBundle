@@ -149,4 +149,22 @@ class SeedsCommandTest extends KernelTestCase
         $this->assertRegExp('/testseeds:fail failed/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 1);
     }
+
+    public function testDebugSeed() {
+        $this->seedsLoader();
+        $command = $this->application->find('testseeds:load');
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(array('command' => $command->getName(), '-d' => true));
+
+        $output = $commandTester->getDisplay();
+
+        var_dump($output);
+
+        $this->assertNotRegExp('/Load country/', $output);
+        $this->assertNotRegExp('/Load town/', $output);
+        $this->assertRegExp('/Starting testseeds:country/', $output);
+        $this->assertRegExp('/Starting testseeds:town/', $output);
+        $this->assertEquals($commandTester->getStatusCode(), 0);
+    }
 }
