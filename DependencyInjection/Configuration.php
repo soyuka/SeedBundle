@@ -22,8 +22,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('prefix')->defaultValue('seed')->info('The seed command prefix')->end()
-                ->scalarNode('directory')->defaultValue('Seeds')->info('The seeds directory')->end()
+                ->scalarNode('prefix')->defaultValue('seed')
+                ->info('The seed command prefix')->end()
+                ->scalarNode('directory')->defaultValue('Seeds')
+                ->info('The seeds directory')->end()
+                ->scalarNode('separator')->defaultValue(':')
+                ->info('The seeds separator')->end()
             ->end();
 
         return $treeBuilder;

@@ -6,7 +6,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Seed extends ContainerAwareCommand implements SeedInterface
+class Seed extends ContainerAwareCommand implements SeedInterface, SeedOrderInterface
 {
 
     /** @var string **/
@@ -28,9 +28,10 @@ class Seed extends ContainerAwareCommand implements SeedInterface
      * Note: Prefix is in the contructor because we need it in the "configure()" method
      * to build the seed name. The container is not available in the configure state.
      */
-    public function __construct($prefix) 
+    public function __construct($prefix, $separator = ":") 
     {
         $this->prefix = $prefix;
+        $this->separator = $separator;
 
         parent::__construct(); 
     }
@@ -68,7 +69,7 @@ class Seed extends ContainerAwareCommand implements SeedInterface
             throw new \InvalidArgumentException("Please configure the command ".get_called_class()." with a seed name");
         }
 
-        $this->setName($this->prefix . ':' . $this->seedName)
+        $this->setName($this->prefix . $this->separator . $this->seedName)
             ->addArgument('method', InputArgument::OPTIONAL);
     }
 
