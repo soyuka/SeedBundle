@@ -106,7 +106,7 @@ EOT
 
                 if(!$seeds) {
                     $commands[] = $command;
-                } else if(in_array($name, $seeds)) {
+                } else if($this->match($name, $seeds)) {
                     $commands[] = $command; 
                 }
             }
@@ -178,5 +178,19 @@ EOT
         }
 
         return $returnCode;
+    }
+
+    private function match($name, $seeds) {
+        foreach($seeds as $choice) {
+            if($choice === $name)
+                return true;
+
+            $choice = '/' . str_replace('*', '.+', $choice) . '/';
+
+            if(preg_match($choice, $name))
+                return true; 
+        }
+
+        return false;
     }
 }

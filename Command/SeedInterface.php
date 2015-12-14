@@ -27,10 +27,4 @@ interface SeedInterface
      * @return void
      */
     public function unload(InputInterface $input, OutputInterface $output);
-
-    /**
-     * get the seed order (default is 0)
-     * @return int
-     */
-    public function getOrder();
 }

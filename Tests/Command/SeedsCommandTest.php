@@ -107,6 +107,22 @@ class SeedsCommandTest extends KernelTestCase
         $this->assertEquals($commandTester->getStatusCode(), 0);
     }
 
+    public function testGlobSeeds() {
+
+        $this->seedsLoader();
+
+        $command = $this->application->find('testseeds:load');
+
+        $commandTester = new CommandTester($command);
+        $commandTester->execute(array('command' => $command->getName(), 'seeds' => ['foo:*']));
+
+        $output = $commandTester->getDisplay();
+
+        $this->assertRegExp('/Load foo:bar/', $output);
+        $this->assertEquals($commandTester->getStatusCode(), 0);
+    }
+
+
     public function testSkipSeeds() {
 
         $this->seedsLoader();
@@ -158,8 +174,6 @@ class SeedsCommandTest extends KernelTestCase
         $commandTester->execute(array('command' => $command->getName(), '-d' => true));
 
         $output = $commandTester->getDisplay();
-
-        var_dump($output);
 
         $this->assertNotRegExp('/Load country/', $output);
         $this->assertNotRegExp('/Load town/', $output);
