@@ -2,9 +2,12 @@
 
 namespace Soyuka\SeedBundle\Command;
 
-class LoadSeedsCommand extends Seeds
+use Soyuka\SeedBundle\Core\Seeds;
+
+final class LoadSeedsCommand extends Seeds
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this->method = 'load';
         parent::configure();
     }

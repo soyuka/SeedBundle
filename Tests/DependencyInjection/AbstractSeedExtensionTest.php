@@ -1,5 +1,7 @@
 <?php
+
 namespace Soyuka\SeedBundle\Tests\DependencyInjection;
+
 //http://egeloen.fr/2013/12/08/unit-test-your-symfony2-bundle-di-like-a-boss/
 
 use Soyuka\SeedBundle\DependencyInjection\SoyukaSeedExtension;
@@ -11,7 +13,7 @@ abstract class AbstractSeedExtensionTest extends \PHPUnit_Framework_TestCase
     private $extension;
     private $container;
 
-    protected function setUp() 
+    protected function setUp()
     {
         $this->extension = new SoyukaSeedExtension();
 
@@ -32,9 +34,8 @@ abstract class AbstractSeedExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Seeds', $this->container->getParameter('seed.directory'));
     }
 
-    public function testDefaultConfiguration() 
+    public function testDefaultConfiguration()
     {
-    
         $this->loadConfiguration($this->container, 'default');
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
@@ -44,10 +45,9 @@ abstract class AbstractSeedExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('seed', $this->container->getParameter('seed.prefix'));
         $this->assertEquals('Seeds', $this->container->getParameter('seed.directory'));
     }
-    
-    public function testDirectoryConfiguration() 
+
+    public function testDirectoryConfiguration()
     {
-    
         $this->loadConfiguration($this->container, 'directory');
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();
@@ -58,9 +58,8 @@ abstract class AbstractSeedExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals('Seeds', $this->container->getParameter('seed.directory'));
     }
 
-    public function testPrefixConfiguration() 
+    public function testPrefixConfiguration()
     {
-    
         $this->loadConfiguration($this->container, 'prefix');
         $this->container->loadFromExtension($this->extension->getAlias());
         $this->container->compile();

@@ -5,8 +5,7 @@ namespace Soyuka\SeedBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Console\Application;
-use Soyuka\SeedBundle\Command\LoadSeedsCommand;
-use Soyuka\SeedBundle\Command\UnloadSeedsCommand;
+use Soyuka\SeedBundle\DependencyInjection\Compiler\ExtensionPass;
 
 class SoyukaSeedBundle extends Bundle
 {
@@ -16,16 +15,11 @@ class SoyukaSeedBundle extends Bundle
 
         parent::build($container);
 
+        $container->addCompilerPass(new ExtensionPass());
     }
 
-    public function registerCommands(Application $application) 
+    public function registerCommands(Application $application)
     {
-
-        $prefix = $this->container->getParameter('seed.prefix');
-
-        $application->add(new LoadSeedsCommand($prefix));
-        $application->add(new UnloadSeedsCommand($prefix));
-
         $seeds = $this->container->get('seed.loader');
         $seeds->load($application);
     }

@@ -5,4 +5,6 @@ doctrine:
     dbal:
         memory: true
     orm: ~
-soyuka_seed: ~
+soyuka_seed: 
+    prefix: 'testseeds'
+    directory: 'Tests/fixtures/Seeds'

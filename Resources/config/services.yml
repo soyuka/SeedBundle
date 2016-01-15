@@ -1,6 +1,34 @@
 services:
-   seed.loader:
-       class: 'Soyuka\SeedBundle\SeedLoader'
-       arguments: [%seed.prefix%]
-       calls:
-           - [ setContainer, [ '@service_container' ] ]
+    seed.loader:
+        class: 'Soyuka\SeedBundle\Core\Loader'
+        arguments:
+           - %seed.prefix%
+           - %seed.separator%
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+
+    seed.seeds:
+        class: 'Soyuka\SeedBundle\Core\Seeds'
+        arguments:
+           - %seed.prefix%
+           - %seed.separator%
+
+    seed.load_seeds_command:
+        class: 'Soyuka\SeedBundle\Command\LoadSeedsCommand'
+        parent: 'seed.seeds'
+        tags: [ { name: 'console.command' } ]
+
+    seed.unload_seeds_command:
+        class: 'Soyuka\SeedBundle\Command\UnloadSeedsCommand'
+        parent: 'seed.seeds'
+        tags: [ { name: 'console.command' } ]
+
+    seed.extension.skip: 
+        class: 'Soyuka\SeedBundle\Extensions\Skip'
+        tags: [ {name: 'seed.extension', priority: 1 } ]
+    seed.extension.order: 
+        class: 'Soyuka\SeedBundle\Extensions\Order'
+        tags: [ {name: 'seed.extension', priority: 1 } ]
+    seed.extension.matches: 
+        class: 'Soyuka\SeedBundle\Extensions\Matches'
+        tags: [ {name: 'seed.extension', priority: 0 } ]

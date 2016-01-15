@@ -1,4 +1,5 @@
 <?php
+
 namespace Soyuka\SeedBundle\Tests\fixtures;
 
 use Soyuka\SeedBundle\Command\Seed;
@@ -7,7 +8,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FailSeed extends Seed
 {
-
     protected function configure()
     {
         $this
@@ -16,14 +16,17 @@ class FailSeed extends Seed
         parent::configure();
     }
 
-    public function load(InputInterface $input, OutputInterface $output){ 
+    public function load(InputInterface $input, OutputInterface $output)
+    {
         return 1;
     }
 
-    public function unload(InputInterface $input, OutputInterface $output){ 
+    public function unload(InputInterface $input, OutputInterface $output)
+    {
     }
 
-    public function getOrder() {
-        return 0; 
+    public function getOrder()
+    {
+        return 0;
     }
 }
