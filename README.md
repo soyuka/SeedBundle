@@ -13,6 +13,7 @@ You can use it as a fixture bundle too by `unloading` data, but it is not it's m
 soyuka_seed:
   prefix: 'seed' #command prefix "seed:yourseedname"
   directory: 'Seeds' #default seed path: Bundle/Seeds
+  separator: ':'
 ```
 
 ## Building a Seed
