@@ -10,6 +10,8 @@ class BadSeed extends Seed
 {
     protected function configure()
     {
+        $this
+            ->setSeedName('');
         parent::configure();
     }
 

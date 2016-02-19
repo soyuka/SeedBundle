@@ -70,7 +70,7 @@ EOT;
      * @see LoadSeedsCommand
      * @see UnloadSeedsCommand
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $break = $input->getOption('break');
         $debug = $input->getOption('debug');
@@ -149,7 +149,7 @@ EOT;
      *
      * @return array commands
      */
-    private function getSeedsCommands()
+    private function getSeedsCommands(): array
     {
         $app = $this->getApplication();
         $commands = [];

@@ -56,7 +56,7 @@ abstract class Seed extends ContainerAwareCommand
      *
      * @return string
      */
-    public function getSeedName()
+    public function getSeedName(): string
     {
         return $this->seedName;
     }

@@ -4,10 +4,12 @@ namespace Soyuka\SeedBundle\Core;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class Loader extends ContainerAware
+class Loader extends Container
 {
+    use ContainerAwareTrait;
     private $prefix;
     private $separator;
 

@@ -11,7 +11,7 @@ use Soyuka\SeedBundle\Model\SeedInterface;
  */
 abstract class Seed extends SeedCompatibility implements SeedOrderInterface, SeedInterface
 {
-    public function getOrder()
+    public function getOrder(): int
     {
         return 0;
     }
