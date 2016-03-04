@@ -1,4 +1,5 @@
 <?php
+
 namespace Soyuka\SeedBundle\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;

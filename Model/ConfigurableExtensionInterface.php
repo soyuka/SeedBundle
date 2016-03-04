@@ -4,7 +4,7 @@ namespace Soyuka\SeedBundle\Model;
 
 use Symfony\Component\Console\Command\Command;
 
-interface ConfigurableExtension
+interface ConfigurableExtensionInterface
 {
     /**
      * Configure the command from the extension.

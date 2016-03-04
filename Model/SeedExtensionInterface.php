@@ -4,7 +4,7 @@ namespace Soyuka\SeedBundle\Model;
 
 use Symfony\Component\Console\Input\InputInterface;
 
-interface SeedExtension
+interface SeedExtensionInterface
 {
     /**
      * Apply the extension to the commands.

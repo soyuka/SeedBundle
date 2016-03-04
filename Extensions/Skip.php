@@ -5,11 +5,12 @@ namespace Soyuka\SeedBundle\Extensions;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
-use Soyuka\SeedBundle\Model\SeedExtension;
-use Soyuka\SeedBundle\Model\AlterationExtension;
-use Soyuka\SeedBundle\Model\ConfigurableExtension;
+use Soyuka\SeedBundle\Model\SeedExtensionInterface;
+use Soyuka\SeedBundle\Model\AlterationExtensionInterface;
+use Soyuka\SeedBundle\Model\ConfigurableExtensionInterface;
+use Soyuka\SeedBundle\Core\Seed;
 
-class Skip implements SeedExtension, AlterationExtension, ConfigurableExtension
+class Skip implements SeedExtensionInterface, AlterationExtensionInterface, ConfigurableExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -22,14 +23,14 @@ class Skip implements SeedExtension, AlterationExtension, ConfigurableExtension
             return;
         }
 
-        $skip = is_array($skip) ?: [$skip];
+        $skip = is_array($skip) ? $skip : [$skip];
 
         $skip = array_map(function ($v) {
             return strtolower($v);
         }, $skip);
 
         //array_filter keeps keys
-        $commands = array_values(array_filter($commands, function ($command) use ($skip) {
+        $commands = array_values(array_filter($commands, function (Seed $command) use ($skip) {
             return !in_array($command->getSeedName(), $skip);
         }));
     }

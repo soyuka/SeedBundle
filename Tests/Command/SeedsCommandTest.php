@@ -33,7 +33,7 @@ class SeedsCommandTest extends KernelTestCase
 
         $command = $application->find('testseeds:load');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(['command' => $command->getName()]);
+        $commandTester->execute(['command' => $command->getName(), '--skip' => ['country', 'foo:bar', 'town']]);
 
         $this->assertRegExp('/No seeds/', $commandTester->getDisplay());
         $this->assertEquals($commandTester->getStatusCode(), 1);

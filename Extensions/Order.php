@@ -3,9 +3,10 @@
 namespace Soyuka\SeedBundle\Extensions;
 
 use Symfony\Component\Console\Input\InputInterface;
-use Soyuka\SeedBundle\Model\SeedExtension;
+use Soyuka\SeedBundle\Model\SeedExtensionInterface;
+use Soyuka\SeedBundle\Core\Seed;
 
-class Order implements SeedExtension
+class Order implements SeedExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -13,7 +14,7 @@ class Order implements SeedExtension
     public function apply(array &$commands, InputInterface $input)
     {
         //Sort through getOrder
-        usort($commands, function ($a, $b) {
+        usort($commands, function (Seed $a, Seed $b) {
             return $a->getOrder() - $b->getOrder();
         });
     }

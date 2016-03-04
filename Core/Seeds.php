@@ -7,8 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\ArrayInput;
-use Soyuka\SeedBundle\Model\AlterationExtension;
-use Soyuka\SeedBundle\Model\ConfigurableExtension;
+use Soyuka\SeedBundle\Model\AlterationExtensionInterface;
+use Soyuka\SeedBundle\Model\ConfigurableExtensionInterface;
 
 abstract class Seeds extends Command
 {
@@ -53,7 +53,7 @@ Want to debug seeds ordering? You can launch a simulation by using the -d option
 EOT;
 
         foreach ($this->extensions as $extension) {
-            if ($extension instanceof ConfigurableExtension) {
+            if ($extension instanceof ConfigurableExtensionInterface) {
                 $extension->configure($this);
                 $help .= $extension->getHelp();
             }
@@ -78,7 +78,7 @@ EOT;
         $commands = $this->getSeedsCommands();
 
         foreach ($this->extensions as $extension) {
-            if ($extension instanceof AlterationExtension) {
+            if ($extension instanceof AlterationExtensionInterface) {
                 $extension->apply($commands, $input);
             }
         }
@@ -93,7 +93,7 @@ EOT;
         }
 
         foreach ($this->extensions as $extension) {
-            if (!($extension instanceof AlterationExtension)) {
+            if (!($extension instanceof AlterationExtensionInterface)) {
                 $extension->apply($commands, $input);
             }
         }

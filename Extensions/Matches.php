@@ -5,11 +5,11 @@ namespace Soyuka\SeedBundle\Extensions;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
-use Soyuka\SeedBundle\Model\SeedExtension;
-use Soyuka\SeedBundle\Model\AlterationExtension;
-use Soyuka\SeedBundle\Model\ConfigurableExtension;
+use Soyuka\SeedBundle\Model\SeedExtensionInterface;
+use Soyuka\SeedBundle\Model\AlterationExtensionInterface;
+use Soyuka\SeedBundle\Model\ConfigurableExtensionInterface;
 
-class Matches implements SeedExtension, AlterationExtension, ConfigurableExtension
+class Matches implements SeedExtensionInterface, AlterationExtensionInterface, ConfigurableExtensionInterface
 {
     /**
      * {@inheritdoc}
