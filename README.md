@@ -1,6 +1,7 @@
 # Symfony/Doctrine Seed Bundle
 
 [![Build Status](https://travis-ci.org/soyuka/SeedBundle.svg?branch=master)](https://travis-ci.org/soyuka/SeedBundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/bec4afda-4a87-4622-8aec-60ce66296617/mini.png)](https://insight.sensiolabs.com/projects/bec4afda-4a87-4622-8aec-60ce66296617)
 
 ## Why
 
