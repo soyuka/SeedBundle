@@ -8,12 +8,18 @@
             "email": "soyuka@gmail.com"
         }
     ],
+    "repositories": [
+     	{
+      	"type": "vcs",
+      	"url": "https://github.com/dunglas/DoctrineBundle"
+    	}  
+    ],
     "require": {
         "php": ">=7.0.0",
         "symfony/framework-bundle": "^2.7|^3.0",
         "symfony/console": "^2.7|^3.0",
         "symfony/finder": "^2.7|^3.0",
-        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-bundle": "dev-property_info",
         "doctrine/orm": "^2.5"
     },
     "autoload": {
