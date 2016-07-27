@@ -23,6 +23,8 @@ class SeedCommandTest extends KernelTestCase
 
         $this->assertTrue($this->application->has('testseeds:country'));
         $this->assertTrue($this->application->has('testseeds:town'));
+        $this->assertTrue($this->application->has('testseeds:street'));
+        $this->assertTrue($this->application->has('testseeds:postcode'));
     }
 
     public function testIsValidSeed()

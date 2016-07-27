@@ -24,6 +24,8 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertTrue($this->application->has('testseeds:country'));
         $this->assertTrue($this->application->has('testseeds:town'));
+        $this->assertTrue($this->application->has('testseeds:street'));
+        $this->assertTrue($this->application->has('testseeds:postcode'));
     }
 
     public function testNoSeeds()
@@ -33,7 +35,7 @@ class SeedsCommandTest extends KernelTestCase
 
         $command = $application->find('testseeds:load');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(['command' => $command->getName(), '--skip' => ['country', 'foo:bar', 'town']]);
+        $commandTester->execute(['command' => $command->getName(), '--skip' => ['foo:bar', 'country', 'town', 'street', 'postcode']]);
 
         $this->assertRegExp('/No seeds/', $commandTester->getDisplay());
         $this->assertEquals($commandTester->getStatusCode(), 1);
@@ -52,7 +54,10 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertRegExp('/Load country/', $output);
         $this->assertRegExp('/Load town/', $output);
+        $this->assertRegExp('/Load street/', $output);
+        $this->assertRegExp('/Load postcode/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 0);
+
     }
 
     public function testUnloadSeeds()
@@ -68,6 +73,8 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertRegExp('/Unload country/', $output);
         $this->assertRegExp('/Unload town/', $output);
+        $this->assertRegExp('/Unload street/', $output);
+        $this->assertRegExp('/Unload postcode/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 0);
     }
 
@@ -84,6 +91,8 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertRegExp('/Load country/', $output);
         $this->assertNotRegExp('/Load town/', $output);
+        $this->assertNotRegExp('/Load street/', $output);
+        $this->assertNotRegExp('/Load postcode/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 0);
     }
 
@@ -115,6 +124,8 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertRegExp('/Load country/', $output);
         $this->assertNotRegExp('/Load town/', $output);
+        $this->assertRegExp('/Load street/', $output);
+        $this->assertRegExp('/Load postcode/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 0);
     }
 
@@ -142,6 +153,8 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertNotRegExp('/Load country/', $output);
         $this->assertNotRegExp('/Load town/', $output);
+        $this->assertNotRegExp('/Load street/', $output);
+        $this->assertNotRegExp('/Load postcode/', $output);
         $this->assertRegExp('/testseeds:fail failed/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 1);
     }
@@ -158,8 +171,32 @@ class SeedsCommandTest extends KernelTestCase
 
         $this->assertNotRegExp('/Load country/', $output);
         $this->assertNotRegExp('/Load town/', $output);
+        $this->assertNotRegExp('/Load street/', $output);
+        $this->assertNotRegExp('/Load postcode/', $output);
         $this->assertRegExp('/Starting testseeds:country/', $output);
         $this->assertRegExp('/Starting testseeds:town/', $output);
+        $this->assertRegExp('/Starting testseeds:street/', $output);
+        $this->assertRegExp('/Starting testseeds:postcode/', $output);
         $this->assertEquals($commandTester->getStatusCode(), 0);
     }
+
+    public function testFromSeed()
+    {
+      $this->seedsLoader();
+
+      $command = $this->application->find('testseeds:load');
+
+      $commandTester = new CommandTester($command);
+      $commandTester->execute(['command' => $command->getName(), '-f' => 'testseeds:street']);
+
+      $output = $commandTester->getDisplay();
+
+      $this->assertNotRegExp('/Load country/', $output);
+      $this->assertNotRegExp('/Load town/', $output);
+      $this->assertRegExp('/Load street/', $output);
+      $this->assertRegExp('/Load postcode/', $output);
+      $this->assertEquals($commandTester->getStatusCode(), 0);
+
+    }
+
 }
