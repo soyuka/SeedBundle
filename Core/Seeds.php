@@ -39,8 +39,8 @@ abstract class Seeds extends Command
         $this->setName($this->prefix.$this->separator.$this->method)
             ->setDescription('Load requested seeds')
             ->addOption('break', '-b', InputOption::VALUE_NONE)
-            ->addOption('debug', '-d', InputOption::VALUE_NONE);
-
+            ->addOption('debug', '-d', InputOption::VALUE_NONE)
+            ->addOption('from', '-f', InputOption::VALUE_REQUIRED);
         $help = <<<EOT
 
 This command loads/unloads a list of seeds
@@ -74,6 +74,7 @@ EOT;
     {
         $break = $input->getOption('break');
         $debug = $input->getOption('debug');
+        $from = $input->getOption('from');
 
         $commands = $this->getSeedsCommands();
 
@@ -101,15 +102,30 @@ EOT;
         //Prepare arguments
         $arguments = new ArrayInput(['method' => $this->method]);
         $returnCode = 0;
+        $startFrom = true;
+
+        if ($from) {
+          $startFrom = false;
+        }
 
         //Loop and execute every seed by printing tstart/tend
+
         for ($i = 0; $i < $l; ++$i) {
+
+            $tstart = microtime(true);
+
+            if (false === $startFrom) {
+              if ($from !== $commands[$i]->getName()) {
+                continue;
+              } else {
+                $startFrom = true;
+              }
+            }
+
             $output->writeln(sprintf(
                 '<info>[%d] Starting %s</info>',
                 $commands[$i]->getOrder(), $commands[$i]->getName()
             ));
-
-            $tstart = microtime(true);
 
             if ($debug) {
                 $code = 0;
@@ -138,7 +154,6 @@ EOT;
                 break;
             }
         }
-
         return $returnCode;
     }
 
