@@ -2,10 +2,13 @@
 
 namespace Soyuka\SeedBundle\Core;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Container;
 
 abstract class Seed extends ContainerAwareCommand
 {
@@ -14,7 +17,7 @@ abstract class Seed extends ContainerAwareCommand
     /** @var string **/
     private $seedName;
 
-    /** @var Doctrine **/
+    /** @var Registry **/
     protected $doctrine;
     /** @var EntityManager **/
     protected $manager;
