@@ -19,7 +19,7 @@ class Loader extends Container
         $this->separator = $separator;
     }
 
-    public function load(Application $application)
+    public function loadSeeds(Application $application)
     {
         $in = $this->container->getParameter('seed.directory');
 

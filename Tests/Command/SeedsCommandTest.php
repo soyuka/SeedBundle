@@ -20,7 +20,7 @@ class SeedsCommandTest extends KernelTestCase
     protected function seedsLoader()
     {
         $seeds = $this->container->get('seed.loader');
-        $seeds->load($this->application);
+        $seeds->loadSeeds($this->application);
 
         $this->assertTrue($this->application->has('testseeds:country'));
         $this->assertTrue($this->application->has('testseeds:town'));

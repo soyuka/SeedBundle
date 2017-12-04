@@ -21,6 +21,6 @@ class SoyukaSeedBundle extends Bundle
     public function registerCommands(Application $application)
     {
         $seeds = $this->container->get('seed.loader');
-        $seeds->load($application);
+        $seeds->loadSeeds($application);
     }
 }
