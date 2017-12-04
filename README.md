@@ -3,9 +3,11 @@
 [![Build Status](https://travis-ci.org/soyuka/SeedBundle.svg?branch=master)](https://travis-ci.org/soyuka/SeedBundle)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/bec4afda-4a87-4622-8aec-60ce66296617/mini.png)](https://insight.sensiolabs.com/projects/bec4afda-4a87-4622-8aec-60ce66296617)
 
+/!\ Starting 01/01/18 I'll not actively maintain this project anymore. I'll merge PR's if any but I'm not using this anymore /!\
+
 ## Why
 
-I needed something to load seed data that needed to stay in database. The only symfony bundle that could be used for this is the [DoctrineFixturesBundle](https://github.com/doctrine/DoctrineFixturesBundle). Those are fixtures, and should be used for testing only. Data included with this are removed/purged when the command is launched. Here, I want the data to be persistent. 
+I needed something to load seed data that needed to stay in database. The only symfony bundle that could be used for this is the [DoctrineFixturesBundle](https://github.com/doctrine/DoctrineFixturesBundle). Those are fixtures, and should be used for testing only. Data included with this are removed/purged when the command is launched. Here, I want the data to be persistent.
 You can use it as a fixture bundle too by `unloading` data, but it is not it's main purpose.
 
 ## Configuration
@@ -19,7 +21,7 @@ soyuka_seed:
 
 ## Building a Seed
 
-The `Seed` class is a `Command` and : 
+The `Seed` class is a `Command` and :
 
 - Must extend `Soyuka\SeedBundle\Command\Seed`
 - Must have a class name that ends by `Seed`
@@ -50,7 +52,7 @@ class CountrySeed extends Seed
         parent::configure();
     }
 
-    public function load(InputInterface $input, OutputInterface $output){ 
+    public function load(InputInterface $input, OutputInterface $output){
 
         //Doctrine logging eats a lot of memory, this is a wrapper to disable logging
         $this->disableDoctrineLogging();
@@ -66,7 +68,7 @@ class CountrySeed extends Seed
         foreach ($countries as $id => $country) {
 
             if($countryRepository->findOneById($id)) {
-                continue; 
+                continue;
             }
 
             $e = new Country();
@@ -84,7 +86,7 @@ class CountrySeed extends Seed
     }
 
     public function getOrder() {
-      return 0; 
+      return 0;
     }
 }
 ```
@@ -103,7 +105,7 @@ The global `seed:load` and `seed:unload` allow you to run multiple seeds in one 
 
 ## Seed order
 
-Every seed has a `getOrder` method that is used to sort them. The default value is `0`. 
+Every seed has a `getOrder` method that is used to sort them. The default value is `0`.
 
 ## Licence
 
