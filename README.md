@@ -5,6 +5,8 @@
 
 /!\ Starting 01/01/18 I'll not actively maintain this project anymore. I'll merge PR's if any but I'm not using this anymore /!\
 
+Maintained fork: https://github.com/evotodi/seed-bundle 
+
 ## Why
 
 I needed something to load seed data that needed to stay in database. The only symfony bundle that could be used for this is the [DoctrineFixturesBundle](https://github.com/doctrine/DoctrineFixturesBundle). Those are fixtures, and should be used for testing only. Data included with this are removed/purged when the command is launched. Here, I want the data to be persistent.
